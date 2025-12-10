@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management</title>
+    <meta name="description" content="Ứng dụng quản lý công việc đơn giản và hiệu quả">
+    <title>Task Management - Quản Lý Công Việc</title>
     <link rel="icon" href="task-checklist.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Danh sách công việc</h1>
+        <h1>📝 Danh Sách Công Việc</h1>
     </header>
 
-    <form>
-        <input type="text" class="todo-input" placeholder="Hôm nay làm gì?">
-        <button class="todo-button" type="submit">
+    <form aria-label="Thêm công việc mới">
+        <input 
+            type="text" 
+            class="todo-input" 
+            placeholder="Hôm nay làm gì?" 
+            aria-label="Nhập công việc mới"
+            autocomplete="off"
+        >
+        <button class="todo-button" type="submit" aria-label="Thêm công việc">
             <i class="fas fa-plus-square"></i>
         </button>
         <div class="select">
-            <select name="todos" class="filter-todo">
+            <select name="todos" class="filter-todo" aria-label="Lọc công việc">
                 <option value="all">Tất cả</option>
                 <option value="completed">Đã xong</option>
                 <option value="uncompleted">Chưa xong</option>
@@ -28,8 +35,8 @@
     </form>
 
     <div class="todo-container">
-        <ul class="todo-list">
-            </ul>
+        <ul class="todo-list" role="list">
+        </ul>
     </div>
 
     <script src="scripts.js"></script>

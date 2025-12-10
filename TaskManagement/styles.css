@@ -6,134 +6,267 @@
 }
 
 body {
-    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     min-height: 100vh;
-    /* 💡 FLEXBOX: Dùng để căn giữa toàn bộ nội dung (header, form, container) theo chiều dọc */
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 2rem 1rem;
+}
+
+/* Header styling */
+header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
 }
 
 /* Form (Ô nhập và nút) */
 form {
-    min-width: 40%;
-    margin-bottom: 2rem;
-    /* 💡 FLEXBOX: Căn chỉnh Input và Button nằm ngang, sát nhau */
+    width: 90%;
+    max-width: 650px;
+    margin-bottom: 2.5rem;
     display: flex;
-}
-
-.todo-input, .todo-button {
-    padding: 0.5rem;
-    font-size: 2rem;
-    border: none;
-    background: white;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .todo-input {
-    width: 100%;
+    flex: 1;
+    min-width: 250px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.todo-input:focus {
+    outline: none;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.todo-input::placeholder {
+    color: #999;
 }
 
 .todo-button {
-    background: #fda085;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.todo-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(245, 87, 108, 0.6);
+}
+
+.todo-button:active {
+    transform: translateY(-1px);
 }
 
 /* Danh sách công việc */
 .todo-container {
-    width: 40%;
+    width: 90%;
+    max-width: 650px;
 }
 
 .todo-list {
-    min-width: 100%;
-    list-style: none; 
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 /* Style cho từng công việc (li) */
 .todo {
-    margin: 0.5rem;
-    background: white;
-    color: black;
-    font-size: 1.5rem;
-    /* 💡 FLEXBOX: Căn chỉnh nội dung công việc, nút check và nút xóa trên một hàng */
-    display: flex; 
-    justify-content: space-between; 
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    color: #333;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: slideIn 0.4s ease;
+}
+
+.todo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
 }
 
 .todo-item {
-    padding: 0rem 0.5rem;
+    padding: 0.8rem 1rem;
     flex: 1;
+    word-break: break-word;
+    font-weight: 500;
 }
 
 /* Khi công việc đã hoàn thành */
 .completed {
     text-decoration: line-through;
-    opacity: 0.5;
+    opacity: 0.6;
+    background: rgba(200, 200, 200, 0.3);
 }
 
-.trash-btn, .complete-btn {
-    /* Các nút check và xóa nằm ở cuối item */
-    background: #ff6f47;
-    color: white;
+.completed .todo-item {
+    color: #888;
+}
+
+/* Buttons styling */
+.trash-btn,
+.complete-btn,
+.edit-btn {
     border: none;
     padding: 1rem;
     cursor: pointer;
     font-size: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    margin-left: 0.3rem;
 }
 
 .complete-btn {
-    background: #7bdc7b;
-}
-/* 1. Định nghĩa Keyframes (Ví dụ: Công việc phóng to từ 0 lên 1) */
-@keyframes scaleUp {
-    from {
-      opacity: 0;
-      transform: scale(0.5); /* Bắt đầu từ kích thước 50% */
-    }
-    to {
-      opacity: 1;
-      transform: scale(1); /* Kết thúc ở kích thước 100% */
-    }
-  }
-  
-  /* Áp dụng Keyframes vào class .todo */
-  .todo {
-    /* ... (Các thuộc tính cũ) ... */
-    animation: scaleUp 0.5s ease forwards; /* Tên animation, thời gian, kiểu chuyển động, giữ trạng thái cuối */
-  }
-  
-  /* Tạo Animation khi Công việc Bị Xóa (Transition) */
-  .fall {
-    /* Khi xóa, dịch chuyển xuống 8rem và làm mờ dần */
-    transform: translateY(8rem) rotateZ(20deg);
-    opacity: 0;
-  }
- /* Style cho khung chứa menu */
-.select {
-    margin-left: 1rem;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
 }
 
-/* Style cho chính cái menu dropdown */
-select {
-    color: #ff6f47; /* Màu chữ cam */
-    width: 10rem;
-    cursor: pointer;
-    padding: 0.7rem;
-    font-size: 1.2rem;
-    border: none; /* Bỏ viền xấu xí mặc định */
-    background: white; 
+.complete-btn:hover {
+    background: linear-gradient(135deg, #0e8074 0%, #2dd368 100%);
+    transform: scale(1.1);
 }
-/* style cho nút chỉnh sửa*/
+
 .edit-btn {
-    background: #6495ed; /* Màu xanh CornflowerBlue */
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
-    border: none;
-    padding: 1rem;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #3a8ddf 0%, #00d4e6 100%);
+    transform: scale(1.1);
+}
+
+.trash-btn {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+.trash-btn:hover {
+    background: linear-gradient(135deg, #e8578a 0%, #f5d02f 100%);
+    transform: scale(1.1);
+}
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation khi xóa */
+.fall {
+    transform: translateY(100px) rotateZ(10deg);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+/* Style cho khung chứa menu */
+.select {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho menu dropdown */
+select {
+    color: #667eea;
+    font-weight: 600;
+    width: 12rem;
     cursor: pointer;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
+    border: none;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+.select::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #667eea;
+    font-size: 0.8rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .todo-input {
+        min-width: 100%;
+    }
+
+    .todo-button,
+    .select {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .todo {
+        font-size: 1rem;
+    }
+
+    .trash-btn,
+    .complete-btn,
+    .edit-btn {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
 } 
